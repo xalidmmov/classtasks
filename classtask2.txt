@@ -1,0 +1,96 @@
+using System;
+
+namespace classtask2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Notebook notebook = new Notebook("asus", "bilmirem", 5, 1500, 16, 512);
+            Notebook notebook1 = new Notebook("acer", "bilmirem", 0, 1800, 8, 256);
+            Notebook[] notebooks = new Notebook[0];
+            AddNotebook(ref notebooks, notebook);
+            AddNotebook(ref notebooks, notebook1);
+            for (int i = 0; i < notebooks.Length; i++)
+            {
+                notebooks[i].ShowFullData();
+            }
+        }
+        public static void AddNotebook(ref Notebook[] notebooks, Notebook notebook)
+        {
+            Array.Resize(ref notebooks, notebooks.Length + 1);
+            notebooks[notebooks.Length - 1] = notebook;
+        }
+    }
+
+    class Product
+    {
+        public string Name;
+        public string Description;
+        public int Count;
+        public bool IsStock;
+        public double Price;
+
+        public Product(string name, string description, int count, double price)
+        {
+           
+                this.Name = name;
+                this.Description = description;
+                this.Count = count;
+                this.Price = price;
+                this.IsStock = count > 0;
+           
+        }
+
+        public void Sale()
+        {
+            if (IsStock )
+            {
+                Count--;
+                if (Count == 0)
+                {
+                    IsStock = false;
+                }
+                Console.WriteLine("Mehsul satildi.");
+            }
+            else
+            {
+                Console.WriteLine("Mehsul yoxdi");
+            }
+        }
+    }
+    class Notebook : Product
+    {
+        public int RAM;
+        public int Storage;
+
+        public Notebook(string name, string description, int count, double price, int ram, int storage)
+            : base(name, description, count, price)
+        {
+
+                this.RAM = ram;
+                this.Storage = storage;
+           
+        }
+        public void ShowFullData()
+        {
+            Console.WriteLine("Name: " + Name);
+            Console.WriteLine("Description: " + Description);
+            Console.WriteLine("Count: " + Count);
+            Console.WriteLine("Is in Stock: " + IsStock );
+            Console.WriteLine("Price: " + Price);
+            Console.WriteLine("RAM: " + RAM + " GB");
+            Console.WriteLine("Storage: " + Storage + " GB");
+        }
+    }
+}   // getfullinfodan da istifade edib return ede bilerdim ama bele etmek istedim
+//public string  getfullinfo(){
+//
+//return $ ----parameters
+//
+//       }
+//public void showfulldata{
+//cw(getfullinfo());
+//
+//     }
+//
